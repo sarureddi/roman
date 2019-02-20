@@ -1,48 +1,94 @@
 #include<stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-static int romanLetterValue(char letter)
-{
-    switch (letter)
-    {
-        case 'M': return 1000;
-        case 'D': return 500;
-        case 'C': return 100;
-        case 'L': return 50;
-        case 'X': return 10;
-        case 'V': return 5;
-        case 'I': return 1;
-        default:
-            fprintf(stderr, "error: invalid Roman numeral letter '%c'\n", letter);
-            exit(1);
+#include<string.h>
+int digit(char);
+int main(){
+char roman_Number[1000];
+ int i=0;
+long int number =0;
+ printf("Enter any roman number (Valid digits are I, V, X, L, C, D, M):  \n");
+  scanf("%s",roman_Number);
+ while(roman_Number[i]
+       {
+           if(digit(roman_Number[i]) < 0)
+               printf("Invalid roman digit : %c",roman_Number[i])
+               return 0;
+       }
+       if((strlen(roman_Number) -i) > 2){
+
+             if(digit(roman_Number[i]) < digit(roman_Number[i+2])){
+
+                 printf("Invalid roman number");
+
+                 return 0;
+
+             }
+
+         }
+
+ 
+
+         if(digit(roman_Number[i]) >= digit(roman_Number[i+1]))
+
+             number = number + digit(roman_Number[i]);
+
+         else{
+
+             number = number + (digit(roman_Number[i+1]) - digit(roman_Number[i]));
+
+             i++;
+
+         }
+
+         i++;
+
     }
+
+ 
+
+    printf("Its decimal value is : %ld",number);
+
+ 
+
+    return 0;
+
+ 
+
 }
 
-int intFromRoman(const char *s)
-{
-    int result = 0;
-    int lastValue = INT_MAX;
-    for (char ch = *s; ch != 0; ch = *(++s))
-    {
-        int value = romanLetterValue(ch);
-        if (value > lastValue)
-        {
-            result += (value - 2 * lastValue);
-        }
-        else
-        {
-            result += value;
-        }
-        lastValue = value;
-    }
-    return result;
-}
+ 
 
-int main(int argc, const char **argv)
-{
-    for (int i = 1; i < argc; ++i) 
-    {
-        printf("%s = %d\n", argv[i], intFromRoman(argv[i]));
+int digit(char c){
+
+ 
+
+    int value=0;
+
+ 
+
+    switch(c){
+
+         case 'I': value = 1; break;
+
+         case 'V': value = 5; break;
+
+         case 'X': value = 10; break;
+
+         case 'L': value = 50; break;
+
+         case 'C': value = 100; break;
+
+         case 'D': value = 500; break;
+
+         case 'M': value = 1000; break;
+
+         case '\0': value = 0; break;
+
+         default: value = -1; 
+
     }
-    exit(0);
+
+ 
+
+    return value;
+
 }
